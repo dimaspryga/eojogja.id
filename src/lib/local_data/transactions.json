@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "activity_id": 1,
+      "status": "completed",
+      "total_price": 299000,
+      "payment_proof": "/assets/payments/proof1.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "user_id": 1,
+      "activity_id": 2,
+      "status": "pending",
+      "total_price": 199000,
+      "payment_proof": null,
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    }
+  ]
+}

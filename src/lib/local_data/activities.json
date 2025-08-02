@@ -1,0 +1,173 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "Paintball",
+      "description": "Fun and thrilling paintball experience",
+      "imageUrls": ["/assets/activity/paintball.jpg"],
+      "location_maps": "<iframe src='https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3967.0362349768025!2d106.8428182!3d-6.125826300000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMDcnMzMuMCJTIDEwNsKwNTAnMzQuMiJF!5e0!3m2!1sen!2sid!4v1679931691632!5m2!1sen!2sid' width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>",
+      "price": 199000,
+      "price_discount": 169150,
+      "category_id": 1,
+      "categoryId": 1,
+      "location": "Bali",
+      "facilities": "Wheel chair",
+      "address": "Jl. Raya Kuta, Kuta, Badung, Bali",
+      "province": "Bali",
+      "city": "Bali",
+      "rating": 4.8,
+      "category": {
+        "id": 1,
+        "name": "Beach Activities"
+      },
+      "reviews": [
+        {
+          "id": 1,
+          "user": {
+            "name": "Agus Hermawan",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 5,
+          "comment": "Challenging but rewarding!",
+          "createdAt": "2024-05-21T10:00:00Z"
+        }
+      ],
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "title": "Jeep Tour",
+      "description": "Discover the beauty of nature on a jeep tour",
+      "imageUrls": ["/assets/activity/jeep-2.jpg"],
+      "location_maps": "<iframe src='https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3967.0362349768025!2d106.8428182!3d-6.125826300000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMDcnMzMuMCJTIDEwNsKwNTAnMzQuMiJF!5e0!3m2!1sen!2sid!4v1679931691632!5m2!1sen!2sid' width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>",
+      "price": 199000,
+      "price_discount": 169150,
+      "category_id": 2,
+      "categoryId": 2,
+      "location": "Mount Bromo",
+      "facilities": "Wheel chair",
+      "address": "Batu, Kec. Batu, Kota Malang, Jawa Timur 65111, Indonesia",
+      "province": "East Java",
+      "city": "Malang",
+      "rating": 4.8,
+      "category": {
+        "id": 2,
+        "name": "Mountain Activities"
+      },
+      "reviews": [
+        {
+          "id": 1,
+          "user": {
+            "name": "Agus Hermawan",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 5,
+          "comment": "Challenging but rewarding!",
+          "createdAt": "2024-05-21T10:00:00Z"
+        },
+        {
+          "id": 2,
+          "user": {
+            "name": "Diana Putri",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 4,
+          "comment": "Beautiful views all around.",
+          "createdAt": "2024-05-19T14:30:00Z"
+        }
+      ],
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "title": "Rope",
+      "description": "Rope climbing adventure",
+      "imageUrls": ["/assets/activity/rope.jpg"],
+      "location_maps": "<iframe src='https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3967.0362349768025!2d106.8428182!3d-6.125826300000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMDcnMzMuMCJTIDEwNsKwNTAnMzQuMiJF!5e0!3m2!1sen!2sid!4v1679931691632!5m2!1sen!2sid' width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>",
+      "price": 199000,
+      "price_discount": 169150,
+      "category_id": 2,
+      "categoryId": 2,
+      "location": "Yogyakarta",
+      "facilities": "Wheel chair, Stroller",
+      "address": "Jl. Gatotkaca, Kec. Batu, Kota Malang, Jawa Timur 65111, Indonesia",
+      "province": "Middle Java",
+      "city": "Yogyakarta",
+      "rating": 4.8,
+      "category": {
+        "id": 2,
+        "name": "Mountain Activities"
+      },
+      "reviews": [
+        {
+          "id": 1,
+          "user": {
+            "name": "Agus Hermawan",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 5,
+          "comment": "Challenging but rewarding!",
+          "createdAt": "2024-05-21T10:00:00Z"
+        },
+        {
+          "id": 2,
+          "user": {
+            "name": "Diana Putri",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 4,
+          "comment": "Beautiful views all around.",
+          "createdAt": "2024-05-19T14:30:00Z"
+        }
+      ],
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "title": "Incentive Fun Game",
+      "description": "Fun game for all age group",
+      "imageUrls": ["/assets/activity/incentive.jpg"],
+      "location_maps": "<iframe src='https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3967.0362349768025!2d106.8428182!3d-6.125826300000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNsKwMDcnMzMuMCJTIDEwNsKwNTAnMzQuMiJF!5e0!3m2!1sen!2sid!4v1679931691632!5m2!1sen!2sid' width='600' height='450' style='border:0;' allowfullscreen='' loading='lazy' referrerpolicy='no-referrer-when-downgrade'></iframe>",
+      "price": 199000,
+      "category_id": 2,
+      "categoryId": 2,
+      "location": "Raja Ampat",
+      "facilities": "Snowboard, Kayak, Stroller",
+      "address": "Raja Ampat, Pulau Raja Ampat, Indonesia",
+      "province": "East Nusa Tenggara",
+      "city": "Raja Ampat",
+      "rating": 4.8,
+      "category": {
+        "id": 2,
+        "name": "Mountain Activities"
+      },
+      "reviews": [
+        {
+          "id": 1,
+          "user": {
+            "name": "Agus Hermawan",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 5,
+          "comment": "Challenging but rewarding!",
+          "createdAt": "2024-05-21T10:00:00Z"
+        },
+        {
+          "id": 2,
+          "user": {
+            "name": "Diana Putri",
+            "avatarUrl": "https://github.com/shadcn.png"
+          },
+          "rating": 4,
+          "comment": "Beautiful views all around.",
+          "createdAt": "2024-05-19T14:30:00Z"
+        }
+      ],
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    }
+  ]
+}

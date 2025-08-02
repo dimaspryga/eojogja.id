@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Bank Transfer",
+      "code": "bank_transfer",
+      "icon": "/assets/payment/bank.svg",
+      "active": true,
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "E-Wallet",
+      "code": "e_wallet",
+      "icon": "/assets/payment/wallet.svg",
+      "active": true,
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    }
+  ]
+}

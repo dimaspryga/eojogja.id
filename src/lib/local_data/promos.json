@@ -1,0 +1,43 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "title": "PROMO MINGGU",
+      "description": "Sangat menguntungkan dan menyenangkan",
+      "imageUrl": "/assets/promo1.jpg",
+      "terms_condition": "aaaa",
+      "promo_code": "21453",
+      "promo_discount_price": 2000000,
+      "minimum_claim_price": 2000000,
+      "valid_until": "2025-12-31T23:59:59.000Z",
+      "createdAt": "2025-07-09T12:59:14.579Z",
+      "updatedAt": "2025-07-09T12:59:14.579Z"
+    },
+    {
+      "id": 2,
+      "title": "PROMO SABTU",
+      "description": "Sangat menguntungkan dan menyenangkan",
+      "imageUrl": "/assets/promo2.jpg",
+      "terms_condition": "aaaa",
+      "promo_code": "21453",
+      "promo_discount_price": 2000000,
+      "minimum_claim_price": 2000000,
+      "valid_until": "2025-12-31T23:59:59.000Z",
+      "createdAt": "2025-07-09T12:59:14.579Z",
+      "updatedAt": "2025-07-09T12:59:14.579Z"
+    },
+    {
+      "id": 3,
+      "title": "PROMO JUMAT",
+      "description": "Sangat menguntungkan dan menyenangkan",
+      "imageUrl": "/assets/promo3.jpg",
+      "terms_condition": "aaaa",
+      "promo_code": "21453",
+      "promo_discount_price": 2000000,
+      "minimum_claim_price": 2000000,
+      "valid_until": "2025-12-31T23:59:59.000Z",
+      "createdAt": "2025-07-09T12:59:14.579Z",
+      "updatedAt": "2025-07-09T12:59:14.579Z"
+    }
+  ]
+}
