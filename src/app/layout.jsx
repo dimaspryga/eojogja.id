@@ -1,5 +1,3 @@
-
-
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
@@ -7,19 +5,18 @@ import { AuthProvider } from "@/context/AuthContext";
 import { CartProvider } from "@/context/CartContext";
 import { cn } from "@/lib/utils";
 import { TransactionProvider } from "@/context/TransactionContext";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const fontSans = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
 
-
 export const metadata = {
-  title: "Kelana",
+  title: "Home | Eojogja.id",
   description: "Your next adventure starts here.",
   icons: {
-    icon: "/assets/kelana-ico.png",
+    icon: "/assets/parama-ico.png",
   },
 };
 

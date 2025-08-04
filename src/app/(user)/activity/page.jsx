@@ -40,6 +40,7 @@ import { useCategory } from "@/hooks/useCategory";
 import { ActivitySection } from "@/components/ui/user/ActivitySection";
 import { Badge } from "@/components/ui/badge";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
+import Image from "next/image";
 
 const PLACEHOLDER_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE2MCIgdmlld0JveD0iMCAwIDMwMCAxNjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTYwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNDcuNSA5MkgxMzVMMTU3LjUgNjBMMTgwLjUgNjBMMTYwIDkySDEzNy41WiIgZmlsbD0iI0QxRDVEQiIvPgo8Y2lyY2xlIGN4PSIxNTcuNSIgY3k9IjYwIiByPSI3LjUiIGZpbGw9IiNEMUQ1REIiLz4KPC9zdmc+";
@@ -80,14 +81,16 @@ const ActivityCard = ({ item, onAddToCart, addingItemId }) => {
     >
       <Link href={`/activity/${item.id}`} className="block">
         <div className="relative h-48 overflow-hidden">
-          <img
-            src={item.imageUrls[0]}
+          <Image
+            src={
+              Array.isArray(item.imageUrls)
+                ? item.imageUrls[0]
+                : item.imageUrls || PLACEHOLDER_DATA_URL
+            }
             alt={item.title}
-            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = PLACEHOLDER_DATA_URL;
-            }}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
           <div className="absolute top-2 left-2 sm:top-3 sm:left-3">
@@ -188,14 +191,16 @@ const ActivityBanner = ({ featuredActivities }) => {
             <CarouselItem key={item.id} className="pl-4 basis-full">
               <Link href={`/activity/${item.id}`}>
                 <div className="relative h-[50vh] w-full rounded-3xl overflow-hidden group shadow-2xl">
-                  <img
-                    src={item.imageUrls?.[0] || PLACEHOLDER_DATA_URL}
+                  <Image
+                    src={
+                      Array.isArray(item.imageUrls)
+                        ? item.imageUrls[0]
+                        : item.imageUrls || PLACEHOLDER_DATA_URL
+                    }
                     alt={item.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover w-full h-full transition-transform duration-700 group-hover:scale-105"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = PLACEHOLDER_DATA_URL;
-                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                   <div className="absolute bottom-0 left-0 p-8 text-white">

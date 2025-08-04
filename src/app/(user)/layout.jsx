@@ -1,6 +1,6 @@
-"use client"
-import Navbar from "@/components/layout/navbar"
-import Footer from "@/components/layout/footer"
+"use client";
+import Navbar from "@/components/layout/navbar";
+import Footer from "@/components/layout/footer";
 
 export default function UserLayout({ children }) {
   return (
@@ -11,5 +11,5 @@ export default function UserLayout({ children }) {
       </main>
       <Footer />
     </div>
-  )
+  );
 }

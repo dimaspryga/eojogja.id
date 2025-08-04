@@ -4,7 +4,7 @@
       "id": 1,
       "name": "Beach Activities",
       "description": "All beach related activities",
-      "image": "/assets/categories/beach.jpg",
+      "imageUrls": "/assets/activity/jeep.jpg",
       "created_at": "2025-08-01T00:00:00.000Z",
       "updated_at": "2025-08-01T00:00:00.000Z"
     },
@@ -12,7 +12,7 @@
       "id": 2,
       "name": "Mountain Activities",
       "description": "All mountain related activities",
-      "image": "/assets/categories/mountain.jpg",
+      "imageUrls": "/assets/activity/jeep.jpg",
       "created_at": "2025-08-01T00:00:00.000Z",
       "updated_at": "2025-08-01T00:00:00.000Z"
     },
@@ -20,7 +20,7 @@
       "id": 3,
       "name": "Cultural Activities",
       "description": "All cultural related activities",
-      "image": "/assets/categories/culture.jpg",
+      "imageUrls": "/assets/activity/jeep.jpg",
       "created_at": "2025-08-01T00:00:00.000Z",
       "updated_at": "2025-08-01T00:00:00.000Z"
     },
@@ -28,7 +28,7 @@
       "id": 4,
       "name": "Adventure Activities",
       "description": "All adventure related activities",
-      "image": "/assets/categories/adventure.jpg",
+      "imageUrls": "/assets/activity/jeep.jpg",
       "created_at": "2025-08-01T00:00:00.000Z",
       "updated_at": "2025-08-01T00:00:00.000Z"
     }

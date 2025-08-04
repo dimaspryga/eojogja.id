@@ -1,13 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCategory } from "@/hooks/useCategory";
 import { useActivity } from "@/hooks/useActivity";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Pagination,
@@ -21,6 +20,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, Mountain, Frown, Compass } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -28,25 +28,25 @@ const ITEMS_PER_PAGE = 12;
 const PLACEHOLDER_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjI0MCIgdmlld0JveD0iMCAwIDMwMCAyNDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjQwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNDcuNSAxMzJIMTM1TDE1Ny41IDkwTDE4MC41IDkwTDE2MCAxMzJIMTQ3LjVaIiBmaWxsPSIjRDFENURCIi8+CjxjaXJjbGUgY3g9IjE1Ny41IiBjeT0iOTAiIHI9IjcuNSIgZmlsbD0iI0QxRDVEQiIvPgo8L3N2Zz4K";
 
-const isExternalImage = (src) => {
-  return src && (src.startsWith("http://") || src.startsWith("https://"));
-};
+// const isExternalImage = (src) => {
+//   return src && (src.startsWith("http://") || src.startsWith("https://"));
+// };
 
-const getImageProps = (src, alt, hasError = false) => {
-  if (!src || hasError) {
-    return {
-      src: PLACEHOLDER_DATA_URL,
-      alt: alt || "Category placeholder",
-      unoptimized: true,
-    };
-  }
+// const getImageProps = (src, alt, hasError = false) => {
+//   if (!src || hasError) {
+//     return {
+//       src: PLACEHOLDER_DATA_URL,
+//       alt: alt || "Category placeholder",
+//       unoptimized: true,
+//     };
+//   }
 
-  if (isExternalImage(src)) {
-    return { src, alt, unoptimized: true };
-  }
+//   if (isExternalImage(src)) {
+//     return { src, alt, unoptimized: true };
+//   }
 
-  return { src, alt };
-};
+//   return { src, alt };
+// };
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -118,16 +118,18 @@ const CategoryCard = ({ item }) => {
     <motion.div variants={cardVariants}>
       <Link href={`/category/${item.id}`} className="block h-full group">
         <div className="flex flex-col w-full h-full overflow-hidden transition-all duration-300 bg-white border border-gray-200 rounded-xl hover:border-blue-300 hover:-translate-y-1">
-          <div className="relative overflow-hidden">
-            <img
-              src={item.imageUrl || "/assets/banner-authpage.png"}
+          <div className="relative h-48 overflow-hidden">
+            <Image
+              src={item.imageUrls}
               alt={item.name}
-              className="object-cover w-full h-48 transition-transform duration-500 group-hover:scale-110"
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = PLACEHOLDER_DATA_URL;
               }}
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3">
               <div className="inline-flex items-center px-1.5 py-0.5 sm:px-2 sm:py-1 mb-1 text-xs font-semibold text-white bg-blue-600 rounded-full">
