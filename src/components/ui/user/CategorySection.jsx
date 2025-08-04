@@ -81,7 +81,7 @@ const CategorySection = React.memo(({ className }) => {
             <div className="flex gap-6 py-2" style={{ height: "64px" }}>
               {Array.from({ length: 8 }).map((_, index) => (
                 <div key={index} className="flex-shrink-0 w-48 h-16">
-                  <div className="relative w-full h-full overflow-hidden rounded-xl bg-gray-200 animate-pulse">
+                  <div className="relative w-full h-full overflow-hidden bg-gray-200 rounded-xl animate-pulse">
                     {/* Category badge skeleton */}
                     <div className="absolute bottom-2 left-2 right-2">
                       <div className="w-16 h-4 mb-1 bg-gray-300 rounded-full animate-pulse"></div>
@@ -106,16 +106,16 @@ const CategorySection = React.memo(({ className }) => {
       className={cn("bg-white", className)}
       aria-label="Explore categories"
     >
-      <div className="w-full py-2">
+      <div className="w-full px-4 py-2 mx-auto">
         <Marquee
           speed={40}
           gradient={true}
-          gradientColor={[255, 255, 255]}
-          gradientWidth={60}
-          pauseOnHover={true}
-          className="py-2 hide-scrollbar w-full"
+          gradientColor={[248, 251, 253]}
+          gradientWidth={200}
+          pauseOnHover={false}
+          className="w-full py-2 hide-scrollbar"
         >
-          <div className="flex gap-6 w-full" style={{ height: "64px" }}>
+          <div className="flex w-full gap-6" style={{ height: "64px" }}>
             {category.map((cat, index) => (
               <motion.div
                 key={cat.id}

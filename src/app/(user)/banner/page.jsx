@@ -171,7 +171,7 @@ const BannerPage = () => {
     >
       <div className="flex flex-col px-4 py-12 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
-          <h1 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl">
+          <h1 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:text-4xl font-title">
             Promotional <span className="text-blue-600">Banners</span>
           </h1>
           <p className="max-w-3xl mx-auto mb-6 text-sm text-gray-600 sm:text-base">

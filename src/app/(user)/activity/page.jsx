@@ -2,10 +2,8 @@
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useActivity } from "@/hooks/useActivity";
 import { useAuth } from "@/context/AuthContext";
-import { useCart } from "@/hooks/useCart";
 import {
   Pagination,
   PaginationContent,
@@ -17,27 +15,14 @@ import {
 } from "@/components/ui/pagination";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Input } from "@/components/ui/input";
-import {
-  MapPin,
-  Star,
-  MessageCircleMore,
-  Search,
-  Frown,
-  Sparkles,
-} from "lucide-react";
-import { toast } from "sonner";
+import { MapPin, Star, Search, Frown, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { useCategory } from "@/hooks/useCategory";
-import { ActivitySection } from "@/components/ui/user/ActivitySection";
 import { Badge } from "@/components/ui/badge";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 import Image from "next/image";
@@ -67,9 +52,20 @@ const formatCurrency = (amount) =>
     minimumFractionDigits: 0,
   }).format(amount);
 
-const ActivityCard = ({ item, onAddToCart, addingItemId }) => {
+const ActivityCard = ({ item }) => {
   const hasDiscount =
     item.price_discount > 0 && item.price_discount < item.price;
+
+  const handleWhatsAppClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const whatsappUrl = `https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(
+      item.title
+    )}%20dengan%20harga%20${encodeURIComponent(
+      formatCurrency(hasDiscount ? item.price_discount : item.price)
+    )}%0AApakah%20masih%20tersedia%3F`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <motion.div
@@ -153,16 +149,7 @@ const ActivityCard = ({ item, onAddToCart, addingItemId }) => {
               type="button"
               size="sm"
               className="text-white transition-all duration-200 bg-green-600 rounded-lg hover:bg-green-700 hover:scale-105"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                const whatsappUrl = `https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(
-                  item.title
-                )}%20dengan%20harga%20${encodeURIComponent(
-                  formatCurrency(hasDiscount ? item.price_discount : item.price)
-                )}%0AApakah%20masih%20tersedia%3F`;
-                window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-              }}
+              onClick={handleWhatsAppClick}
             >
               <IconBrandWhatsapp className="w-3 h-3 sm:w-4 sm:h-4" />
             </Button>
@@ -240,13 +227,11 @@ const ActivityBanner = ({ featuredActivities }) => {
 const ActivityPageSkeleton = () => (
   <div className="min-h-screen py-8 bg-white">
     <div className="container px-4 mx-auto max-w-7xl">
-      {/* Header Skeleton */}
       <div className="mb-8">
         <Skeleton className="w-1/3 h-8 mb-4 rounded-xl" />
         <Skeleton className="w-1/2 h-6 rounded-xl" />
       </div>
 
-      {/* Search and Filter Skeleton */}
       <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:items-center sm:justify-between">
         <Skeleton className="w-full h-12 sm:w-80 rounded-xl" />
         <div className="flex gap-2">
@@ -255,7 +240,6 @@ const ActivityPageSkeleton = () => (
         </div>
       </div>
 
-      {/* Activity Grid Skeleton */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.from({ length: 8 }).map((_, index) => (
           <div
@@ -275,7 +259,6 @@ const ActivityPageSkeleton = () => (
         ))}
       </div>
 
-      {/* Pagination Skeleton */}
       <div className="flex items-center justify-center mt-8">
         <Skeleton className="w-64 h-12 rounded-xl" />
       </div>
@@ -284,59 +267,23 @@ const ActivityPageSkeleton = () => (
 );
 
 const ActivityPage = () => {
-  const { user, loading: isAuthLoading } = useAuth();
+  const { loading: isAuthLoading } = useAuth();
   const { activity, isLoading: isActivityLoading, error } = useActivity();
-  const { addToCart } = useCart();
-  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [addingItemId, setAddingItemId] = useState(null);
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
     setHasMounted(true);
   }, []);
 
-  // Reset pagination when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [searchQuery, selectedCategory]);
 
-  // Debug selectedCategory changes
-  useEffect(() => {
-    console.log("Selected category changed to:", selectedCategory);
-  }, [selectedCategory]);
-
-  const handleAddToCart = async (e, item) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    if (!user) {
-      toast.error("Please login to add items to cart");
-      router.push("/login");
-      return;
-    }
-
-    setAddingItemId(item.id);
-    try {
-      await addToCart(item.id, 1);
-    } catch (error) {
-      // Error toast already handled in CartContext
-    } finally {
-      setAddingItemId(null);
-    }
-  };
-
   const handleCategoryChange = (e) => {
-    const newCategory = e.target.value;
-    console.log(
-      "Category dropdown changed from",
-      selectedCategory,
-      "to",
-      newCategory
-    );
-    setSelectedCategory(newCategory);
+    setSelectedCategory(e.target.value);
   };
 
   const filteredActivities = useMemo(() => {
@@ -356,16 +303,10 @@ const ActivityPage = () => {
     if (selectedCategory !== "all") {
       filtered = filtered.filter((item) => {
         const itemCategory = item.category?.name || item.category;
-        console.log(
-          `Filtering: "${item.title}" category "${itemCategory}" vs selected "${selectedCategory}"`
-        );
         return itemCategory === selectedCategory;
       });
     }
 
-    console.log(
-      `Filtered activities: ${filtered.length} out of ${activity.length}`
-    );
     return filtered;
   }, [activity, searchQuery, selectedCategory]);
 
@@ -376,27 +317,14 @@ const ActivityPage = () => {
 
   const categories = useMemo(() => {
     if (!activity) return [];
-
-    // Debug: Log first few activities to see structure
-    if (activity.length > 0) {
-      console.log("First activity structure:", activity[0]);
-      console.log("Category from first activity:", activity[0].category);
-    }
-
     const uniqueCategories = [
       ...new Set(
         activity
-          .map((item) => {
-            const category = item.category?.name || item.category;
-            console.log(`Activity "${item.title}" category:`, category);
-            return category;
-          })
+          .map((item) => item.category?.name || item.category)
           .filter(Boolean)
       ),
     ];
-
-    console.log("Available categories:", uniqueCategories);
-    return uniqueCategories.sort(); // Sort alphabetically
+    return uniqueCategories.sort();
   }, [activity]);
 
   const featuredActivities = useMemo(() => {
@@ -480,7 +408,7 @@ const ActivityPage = () => {
       >
         <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="mb-8 text-center">
-            <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
+            <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl font-title">
               Explore{" "}
               <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">
                 Activities
@@ -491,10 +419,8 @@ const ActivityPage = () => {
             </p>
           </div>
 
-          {/* Featured Activities Banner */}
           <ActivityBanner featuredActivities={featuredActivities} />
 
-          {/* Search and Filter */}
           <div className="mb-8 space-y-4 lg:space-y-0 lg:flex lg:items-center lg:space-x-4">
             <div className="relative flex-1">
               <Search className="absolute w-4 h-4 text-gray-400 -translate-y-1/2 pointer-events-none left-3 top-1/2" />
@@ -566,12 +492,7 @@ const ActivityPage = () => {
               className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
             >
               {currentActivities.map((item) => (
-                <ActivityCard
-                  key={item.id}
-                  item={item}
-                  onAddToCart={handleAddToCart}
-                  addingItemId={addingItemId}
-                />
+                <ActivityCard key={item.id} item={item} />
               ))}
             </motion.div>
           )}

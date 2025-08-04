@@ -320,7 +320,7 @@ const PromoPage = () => {
               />
             </svg>
           </div>
-          <h1 className="mb-4 text-3xl font-bold text-gray-900">
+          <h1 className="mb-4 text-3xl font-bold text-gray-900 font-title">
             Error Loading Promos
           </h1>
           <p className="text-gray-600">
@@ -343,7 +343,7 @@ const PromoPage = () => {
       >
         <div className="container px-4 mx-auto max-w-7xl">
           <div className="mb-8 text-center">
-            <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
+            <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl font-title">
               Special{" "}
               <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">
                 Promos

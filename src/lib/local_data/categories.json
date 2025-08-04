@@ -31,6 +31,54 @@
       "imageUrls": "/assets/activity/jeep.jpg",
       "created_at": "2025-08-01T00:00:00.000Z",
       "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Food and Drink",
+      "description": "All food and drink related activities",
+      "imageUrls": "/assets/activity/jeep.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Wellness and Relaxation",
+      "description": "All wellness and relaxation related activities",
+      "imageUrls": "/assets/activity/jeep.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 7,
+      "name": "Shopping",
+      "description": "All shopping related activities",
+      "imageUrls": "/assets/activity/jeep.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 8,
+      "name": "Nightlife",
+      "description": "All nightlife related activities",
+      "imageUrls": "/assets/activity/jeep.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 9,
+      "name": "Family Activities",
+      "description": "All family related activities",
+      "imageUrls": "/assets/activity/jeep.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
+    },
+    {
+      "id": 10,
+      "name": "Sports and Recreation",
+      "description": "All sports and recreation related activities",
+      "imageUrls": "/assets/activity/jeep.jpg",
+      "created_at": "2025-08-01T00:00:00.000Z",
+      "updated_at": "2025-08-01T00:00:00.000Z"
     }
   ]
 }

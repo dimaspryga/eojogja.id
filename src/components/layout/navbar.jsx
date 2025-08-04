@@ -4,34 +4,17 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import { useCart } from "@/hooks/useCart";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
+
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import {
-  ShoppingCart,
   Menu,
   X,
-  User,
-  LogOut,
-  Receipt,
   Home,
   MapPin,
   Tag,
   Gift,
-  Settings,
 } from "lucide-react";
 
 const Navbar = () => {
@@ -40,7 +23,7 @@ const Navbar = () => {
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const lastScrollY = useRef(0);
   const { user, logout, loading } = useAuth();
-  const { cartItems, cartCount, isLoading: isCartLoading } = useCart();
+
   const pathname = usePathname();
   const router = useRouter();
 
@@ -102,59 +85,42 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-30 bg-black/20 backdrop-blur-sm lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
           {/* Mobile Menu Panel */}
           <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
+            initial={{ y: -20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -20, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed top-0 right-0 z-50 h-full bg-white shadow-2xl w-80 lg:hidden"
+            className="fixed left-0 right-0 z-40 bg-white shadow-2xl lg:hidden overflow-y-auto"
+            style={{ top: "4rem", height: "calc(100vh - 4rem)" }}
           >
             <div className="flex flex-col h-full">
-              {/* Header */}
-              <div className="flex items-center justify-between p-6 bg-white border-b border-gray-100">
-                <div className="flex items-center space-x-3">
-                  <img
-                    src="/assets/kelana.webp"
-                    alt="Kelana Logo"
-                    className="object-contain w-10 h-10"
-                  />
-                  <h2 className="text-lg font-bold text-gray-900">Kelana</h2>
+              <div className="flex-1 px-6 py-4 bg-white">
+                <div className="space-y-4">
+                  {/* Main Navigation */}
+                  {navigationItems.map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center space-x-3 px-4 py-3 text-base font-medium rounded-xl transition-all duration-200 ${
+                          isActive(item.href)
+                            ? "text-blue-700 bg-blue-50 border border-blue-200"
+                            : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                        }`}
+                      >
+                        <Icon className="w-5 h-5" />
+                        <span>{item.label}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-xl hover:bg-gray-100"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-              </div>
-
-              {/* Navigation */}
-              <div className="flex-1 p-6 space-y-2 bg-white">
-                {navigationItems.map((item) => {
-                  const Icon = item.icon;
-                  return (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className={`flex items-center space-x-3 px-4 py-3 text-base font-medium rounded-xl transition-all duration-200 ${
-                        isActive(item.href)
-                          ? "text-blue-700 bg-blue-50 border border-blue-200"
-                          : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                      }`}
-                    >
-                      <Icon className="w-5 h-5" />
-                      <span>{item.label}</span>
-                    </Link>
-                  );
-                })}
               </div>
             </div>
           </motion.div>
@@ -193,6 +159,39 @@ const Navbar = () => {
               </div>
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative z-50 lg:hidden p-2"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <motion.div
+              initial={false}
+              animate={isMobileMenuOpen ? { rotate: 90 } : { rotate: 0 }}
+              transition={{ duration: 0.2 }}
+            >
+              <motion.div
+                animate={isMobileMenuOpen ? "open" : "closed"}
+                variants={{
+                  open: {
+                    scale: 1.2,
+                  },
+                  closed: {
+                    scale: 1,
+                  },
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-6 h-6 text-gray-600" />
+                ) : (
+                  <Menu className="w-6 h-6 text-gray-600" />
+                )}
+              </motion.div>
+            </motion.div>
+          </Button>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex lg:items-center lg:space-x-1">

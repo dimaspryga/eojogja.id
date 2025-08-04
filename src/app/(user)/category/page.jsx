@@ -287,7 +287,7 @@ const CategoryPage = () => {
       >
         <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="mb-8 text-center">
-            <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl">
+            <h1 className="mb-4 text-2xl font-bold text-gray-900 sm:text-3xl lg:text-4xl font-title">
               Explore{" "}
               <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">
                 Categories

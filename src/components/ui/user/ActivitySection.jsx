@@ -3,9 +3,7 @@
 import React, { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter, usePathname } from "next/navigation";
 import { useActivity } from "@/hooks/useActivity";
-import { useCart } from "@/hooks/useCart";
 import { useAuth } from "@/context/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -16,8 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { MapPin, Star, MessageCircleMore, Sparkles } from "lucide-react";
-import { toast } from "sonner";
+import { MapPin, Star, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { IconBrandWhatsapp } from "@tabler/icons-react";
 
@@ -28,7 +25,6 @@ const formatCurrency = (amount) =>
     minimumFractionDigits: 0,
   }).format(amount);
 
-// Optimized image utility functions
 const PLACEHOLDER_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE2MCIgdmlld0JveD0iMCAwIDMwMCAxNjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTYwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNDcuNSA5MkgxMzVMMTU3LjUgNjBMMTgwLjUgNjBMMTYwIDkySDEzNy41WiIgZmlsbD0iI0QxRDVEQiIvPgo8Y2lyY2xlIGN4PSIxNTcuNSIgY3k9IjYwIiByPSI3LjUiIGZpbGw9IiNEMUQ1REIiLz4KPC9zdmc+";
 
@@ -53,17 +49,23 @@ const getImageProps = (src, alt, hasError = false) => {
 };
 
 const ActivityCard = React.memo(
-  ({
-    activityItem,
-    handleAddToCart,
-    addingItemId,
-    index,
-    imageErrors,
-    onImageError,
-  }) => {
+  ({ activityItem, index, imageErrors, onImageError }) => {
     const hasDiscount =
       activityItem.price_discount > 0 &&
       activityItem.price_discount < activityItem.price;
+
+    const handleWhatsAppClick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const whatsappUrl = `https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(
+        activityItem.title
+      )}%20dengan%20harga%20${encodeURIComponent(
+        formatCurrency(
+          hasDiscount ? activityItem.price_discount : activityItem.price
+        )
+      )}%0AApakah%20masih%20tersedia%3F`;
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    };
 
     return (
       <div className="relative overflow-hidden transition-all duration-300 bg-white border border-gray-200 group rounded-xl hover:border-blue-300 hover:-translate-y-1">
@@ -147,20 +149,7 @@ const ActivityCard = React.memo(
                   type="button"
                   size="sm"
                   className="text-white transition-all duration-200 bg-green-600 rounded-lg hover:bg-green-700 hover:scale-105"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const whatsappUrl = `https://wa.me/6281234567890?text=Halo%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(
-                      activityItem.title
-                    )}%20dengan%20harga%20${encodeURIComponent(
-                      formatCurrency(
-                        hasDiscount
-                          ? activityItem.price_discount
-                          : activityItem.price
-                      )
-                    )}%0AApakah%20masih%20tersedia%3F`;
-                    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-                  }}
+                  onClick={handleWhatsAppClick}
                 >
                   <IconBrandWhatsapp className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Button>
@@ -207,43 +196,16 @@ const ActivitySkeleton = () => (
 
 const ActivitySection = React.memo(() => {
   const { activity: apiActivity, isLoading: isActivityLoading } = useActivity();
-  const { addToCart } = useCart();
-  const { user, loading: isAuthLoading } = useAuth();
-  const router = useRouter();
-  const pathname = usePathname();
+  const { loading: isAuthLoading } = useAuth();
 
   // Import local data
   const { data: localActivities } = require("@/lib/local_data/activities.json");
 
-  const [addingItemId, setAddingItemId] = useState(null);
   const [imageErrors, setImageErrors] = useState(new Set());
 
   const handleImageError = useCallback((activityId) => {
     setImageErrors((prev) => new Set([...prev, activityId]));
   }, []);
-
-  const handleAddToCart = useCallback(
-    async (e, activity) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      if (!user) {
-        toast.info("Please log in to add items to your cart.");
-        router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
-        return;
-      }
-
-      setAddingItemId(activity.id);
-      try {
-        await addToCart(activity.id, 1);
-      } catch (err) {
-        // Error toast already handled in CartContext
-      } finally {
-        setAddingItemId(null);
-      }
-    },
-    [user, router, pathname, addToCart]
-  );
 
   const isLoading = isActivityLoading || isAuthLoading;
 
@@ -278,8 +240,6 @@ const ActivitySection = React.memo(() => {
                 </div>
               ))}
             </div>
-
-            {/* Navigation buttons skeleton */}
             <div className="absolute left-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 border border-gray-200 animate-pulse hidden sm:block" />
             <div className="absolute right-[-20px] top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 border border-gray-200 animate-pulse hidden sm:block" />
           </div>
@@ -297,10 +257,10 @@ const ActivitySection = React.memo(() => {
       <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            <h2 className="text-3xl font-bold text-gray-900 md:text-3xl lg:text-4xl font-title">
               Popular <span className="text-blue-600">Activities</span>
             </h2>
-            <p className="mt-2 text-sm text-gray-600">
+            <p className="mt-2 text-sm text-gray-600 md:text-md lg:text-lg">
               Explore a variety of the most sought-after activities.
             </p>
           </div>
@@ -334,8 +294,6 @@ const ActivitySection = React.memo(() => {
                 >
                   <ActivityCard
                     activityItem={activityItem}
-                    handleAddToCart={handleAddToCart}
-                    addingItemId={addingItemId}
                     index={index}
                     imageErrors={imageErrors}
                     onImageError={handleImageError}

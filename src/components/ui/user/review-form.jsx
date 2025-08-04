@@ -21,7 +21,7 @@ export const ReviewForm = ({ activityId }) => {
     }
     setIsSubmitting(true);
     console.log({ activityId, rating, comment });
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    await new Promise((resolve) => setTimeout(resolve, 1500));
     toast.success("Thank you for your review!");
     setRating(0);
     setComment("");
@@ -34,12 +34,15 @@ export const ReviewForm = ({ activityId }) => {
       <form onSubmit={handleSubmit} className="space-y-2">
         <div className="space-y-2">
           <div className="space-y-1">
-            <Label htmlFor="rating" className="text-xs font-medium text-gray-700">
+            <Label
+              htmlFor="rating"
+              className="text-xs font-medium text-gray-700"
+            >
               Rating
             </Label>
             <select
               id="rating"
-              className="w-full px-3 py-2 text-sm border border-gray-200 rounded bg-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-300 appearance-none cursor-pointer"
+              className="w-full px-3 py-2 text-sm transition-all duration-300 bg-white border border-gray-200 rounded appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-300"
               value={rating}
               onChange={(e) => setRating(Number(e.target.value))}
               required
@@ -51,15 +54,28 @@ export const ReviewForm = ({ activityId }) => {
               <option value={2}>2 - Fair</option>
               <option value={1}>1 - Poor</option>
             </select>
-            <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-              <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            <div className="absolute -translate-y-1/2 pointer-events-none right-3 top-1/2">
+              <svg
+                className="w-3 h-3 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </div>
           </div>
 
           <div className="space-y-1">
-            <Label htmlFor="comment" className="text-xs font-medium text-gray-700">
+            <Label
+              htmlFor="comment"
+              className="text-xs font-medium text-gray-700"
+            >
               Comment
             </Label>
             <textarea
@@ -72,7 +88,11 @@ export const ReviewForm = ({ activityId }) => {
             />
           </div>
         </div>
-        <Button type="submit" size="sm" disabled={isSubmitting || rating === 0 || !comment}>
+        <Button
+          type="submit"
+          size="sm"
+          disabled={isSubmitting || rating === 0 || !comment}
+        >
           {isSubmitting ? (
             <>
               <Loader2 className="w-3 h-3 mr-2 animate-spin" /> Submitting...

@@ -1,43 +1,61 @@
-"use client"
+"use client";
 
-import React, { useCallback, useRef } from "react"
-import { useRouter } from "next/navigation"
-import { usePromo } from "@/hooks/usePromo"
-import { CheckCircle2, Gift, Percent, Calendar, ArrowRight, Sparkles, Copy } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel"
-import Autoplay from "embla-carousel-autoplay"
-import { Badge } from "@/components/ui/badge"
-import { toast } from "sonner"
+import React, { useCallback, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { usePromo } from "@/hooks/usePromo";
+import {
+  CheckCircle2,
+  Gift,
+  Percent,
+  Calendar,
+  ArrowRight,
+  Sparkles,
+  Copy,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 const formatCurrency = (amount) =>
   new Intl.NumberFormat("id-ID", {
     style: "currency",
     currency: "IDR",
     minimumFractionDigits: 0,
-  }).format(amount)
+  }).format(amount);
 
 const PromoCard = React.memo(({ promoItem, index, onViewDetail }) => {
-  if (!promoItem) return null
+  if (!promoItem) return null;
 
   const discountValue = promoItem.promo_discount_percentage
     ? `${promoItem.promo_discount_percentage}%`
-    : formatCurrency(promoItem.promo_discount_price)
+    : formatCurrency(promoItem.promo_discount_price);
 
   const expiryDate = promoItem.endDate
-    ? new Date(promoItem.endDate).toLocaleDateString("en-US", { day: "numeric", month: "long" })
-    : "December"
+    ? new Date(promoItem.endDate).toLocaleDateString("en-US", {
+        day: "numeric",
+        month: "long",
+      })
+    : "December";
 
-  const isExpired = promoItem.endDate && new Date(promoItem.endDate) < new Date()
+  const isExpired =
+    promoItem.endDate && new Date(promoItem.endDate) < new Date();
 
   const handleCopyCode = (e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    navigator.clipboard.writeText(promoItem.promo_code)
-    toast.success("Promo code copied to clipboard!")
-  }
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(promoItem.promo_code);
+    toast.success("Promo code copied to clipboard!");
+  };
 
   return (
     <motion.article
@@ -62,35 +80,49 @@ const PromoCard = React.memo(({ promoItem, index, onViewDetail }) => {
 
       <div className="relative p-4 sm:p-6">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
+        <div className="flex flex-col mb-4 sm:flex-row sm:items-center sm:justify-between sm:mb-6">
           <div className="flex items-center gap-3 mb-3 sm:mb-0">
             <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl">
-              <Gift className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              <Gift className="w-5 h-5 text-white sm:w-6 sm:h-6" />
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-medium text-gray-600">Special Offer</p>
+              <p className="text-xs font-medium text-gray-600 sm:text-sm">
+                Special Offer
+              </p>
               <p className="text-xs text-gray-500">Limited Time</p>
             </div>
           </div>
           <div className="text-left sm:text-right">
-            <div className={`text-2xl sm:text-3xl font-bold ${isExpired ? "text-gray-400" : "text-blue-600"}`}>{discountValue}</div>
+            <div
+              className={`text-2xl sm:text-3xl font-bold ${
+                isExpired ? "text-gray-400" : "text-blue-600"
+              }`}
+            >
+              {discountValue}
+            </div>
             <p className="text-xs text-gray-500">Discount</p>
           </div>
         </div>
 
         {/* Title */}
-        <h3 className={`text-base sm:text-lg font-bold mb-3 sm:mb-4 line-clamp-2 ${isExpired ? "text-gray-500" : "text-gray-900"}`}>
+        <h3
+          className={`text-base sm:text-lg font-bold mb-3 sm:mb-4 line-clamp-2 ${
+            isExpired ? "text-gray-500" : "text-gray-900"
+          }`}
+        >
           {promoItem.title || "Special Promo"}
         </h3>
 
         {/* Details */}
-        <div className="mb-4 sm:mb-6 space-y-2 sm:space-y-3">
-          <div className="flex items-center text-xs sm:text-sm text-gray-600">
-            <CheckCircle2 className="flex-shrink-0 w-3 h-3 sm:w-4 sm:h-4 mr-2 sm:mr-3 text-green-500" />
-            <span>Min. purchase {formatCurrency(promoItem.minimum_claim_price)}</span>
+        <div className="mb-4 space-y-2 sm:mb-6 sm:space-y-3">
+          <div className="flex items-center text-xs text-gray-600 sm:text-sm">
+            <CheckCircle2 className="flex-shrink-0 w-3 h-3 mr-2 text-green-500 sm:w-4 sm:h-4 sm:mr-3" />
+            <span>
+              Min. purchase {formatCurrency(promoItem.minimum_claim_price)}
+            </span>
           </div>
-          <div className="flex items-center text-xs sm:text-sm text-gray-600">
-            <Calendar className="flex-shrink-0 w-3 h-3 sm:w-4 sm:h-4 mr-2 sm:mr-3 text-blue-500" />
+          <div className="flex items-center text-xs text-gray-600 sm:text-sm">
+            <Calendar className="flex-shrink-0 w-3 h-3 mr-2 text-blue-500 sm:w-4 sm:h-4 sm:mr-3" />
             <span>Valid until {expiryDate}</span>
           </div>
         </div>
@@ -99,13 +131,19 @@ const PromoCard = React.memo(({ promoItem, index, onViewDetail }) => {
         <div className="mb-4 sm:mb-6">
           <div
             className={`p-3 sm:p-4 border border-dashed rounded-xl ${
-              isExpired ? "border-gray-200 bg-gray-50" : "border-blue-200 bg-blue-50"
+              isExpired
+                ? "border-gray-200 bg-gray-50"
+                : "border-blue-200 bg-blue-50"
             }`}
           >
             <div className="flex items-center justify-between">
               <div>
                 <p className="mb-1 text-xs text-gray-500">Promo Code</p>
-                <p className={`font-mono font-bold text-sm sm:text-lg ${isExpired ? "text-gray-500" : "text-blue-800"}`}>
+                <p
+                  className={`font-mono font-bold text-sm sm:text-lg ${
+                    isExpired ? "text-gray-500" : "text-blue-800"
+                  }`}
+                >
                   {promoItem.promo_code}
                 </p>
               </div>
@@ -115,7 +153,9 @@ const PromoCard = React.memo(({ promoItem, index, onViewDetail }) => {
                 onClick={handleCopyCode}
                 disabled={isExpired}
                 className={`${
-                  isExpired ? "text-gray-400" : "text-blue-600 hover:text-blue-700 hover:bg-blue-100"
+                  isExpired
+                    ? "text-gray-400"
+                    : "text-blue-600 hover:text-blue-700 hover:bg-blue-100"
                 } rounded-xl`}
               >
                 <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
@@ -140,57 +180,57 @@ const PromoCard = React.memo(({ promoItem, index, onViewDetail }) => {
           ) : (
             <>
               Use This Promo
-              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-3 h-3 ml-2 transition-transform sm:w-4 sm:h-4 group-hover:translate-x-1" />
             </>
           )}
         </Button>
       </div>
     </motion.article>
-  )
-})
+  );
+});
 
-PromoCard.displayName = "PromoCard"
+PromoCard.displayName = "PromoCard";
 
 const PromoSkeleton = () => (
-  <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
+  <div className="overflow-hidden bg-white border border-gray-200 rounded-2xl">
     <div className="p-4 sm:p-6">
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 sm:mb-6">
+      <div className="flex flex-col mb-4 sm:flex-row sm:items-center sm:justify-between sm:mb-6">
         <div className="flex items-center gap-3 mb-3 sm:mb-0">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gray-200 rounded-xl animate-pulse" />
+          <div className="w-10 h-10 bg-gray-200 sm:w-12 sm:h-12 rounded-xl animate-pulse" />
           <div>
-            <div className="w-16 h-3 sm:w-20 bg-gray-200 rounded animate-pulse" />
-            <div className="w-12 h-2 sm:w-16 bg-gray-200 rounded animate-pulse mt-1" />
+            <div className="w-16 h-3 bg-gray-200 rounded sm:w-20 animate-pulse" />
+            <div className="w-12 h-2 mt-1 bg-gray-200 rounded sm:w-16 animate-pulse" />
           </div>
         </div>
         <div className="text-left sm:text-right">
-          <div className="w-12 h-6 sm:w-16 sm:h-8 bg-gray-200 rounded animate-pulse" />
-          <div className="w-10 h-2 sm:w-12 bg-gray-200 rounded animate-pulse mt-1" />
+          <div className="w-12 h-6 bg-gray-200 rounded sm:w-16 sm:h-8 animate-pulse" />
+          <div className="w-10 h-2 mt-1 bg-gray-200 rounded sm:w-12 animate-pulse" />
         </div>
       </div>
-      <div className="h-4 sm:h-5 bg-gray-200 rounded mb-3 sm:mb-4 animate-pulse" />
-      <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-6">
-        <div className="h-3 sm:h-4 bg-gray-200 rounded animate-pulse" />
-        <div className="h-3 sm:h-4 bg-gray-200 rounded animate-pulse" />
+      <div className="h-4 mb-3 bg-gray-200 rounded sm:h-5 sm:mb-4 animate-pulse" />
+      <div className="mb-4 space-y-2 sm:space-y-3 sm:mb-6">
+        <div className="h-3 bg-gray-200 rounded sm:h-4 animate-pulse" />
+        <div className="h-3 bg-gray-200 rounded sm:h-4 animate-pulse" />
       </div>
-      <div className="h-16 sm:h-20 bg-gray-100 rounded-xl mb-4 sm:mb-6 animate-pulse" />
-      <div className="w-full h-9 sm:h-10 bg-gray-200 rounded-xl animate-pulse" />
+      <div className="h-16 mb-4 bg-gray-100 sm:h-20 rounded-xl sm:mb-6 animate-pulse" />
+      <div className="w-full bg-gray-200 h-9 sm:h-10 rounded-xl animate-pulse" />
     </div>
   </div>
-)
+);
 
 const PromoSection = React.memo(() => {
-  const router = useRouter()
-  const { promo, isLoading } = usePromo()
-  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }))
+  const router = useRouter();
+  const { promo, isLoading } = usePromo();
+  const plugin = useRef(Autoplay({ delay: 4000, stopOnInteraction: true }));
 
   const handleViewDetail = useCallback(
     (id) => {
-      router.push(`/promo/${id}`)
+      router.push(`/promo/${id}`);
     },
-    [router],
-  )
+    [router]
+  );
 
-  const displayedPromos = (promo || []).slice(0, 3)
+  const displayedPromos = (promo || []).slice(0, 3);
 
   if (isLoading) {
     return (
@@ -200,20 +240,23 @@ const PromoSection = React.memo(() => {
             <div className="h-10 mb-4 rounded-2xl w-80 bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 animate-pulse" />
             <div className="h-6 rounded-2xl w-96 bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 animate-pulse" />
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-4">
+          <div className="flex gap-4 pb-4 overflow-x-auto">
             {Array.from({ length: 4 }).map((_, index) => (
-              <div key={index} className="flex-shrink-0 w-1/2 sm:w-1/2 lg:w-1/3">
+              <div
+                key={index}
+                className="flex-shrink-0 w-1/2 sm:w-1/2 lg:w-1/3"
+              >
                 <PromoSkeleton />
               </div>
             ))}
           </div>
         </div>
       </section>
-    )
+    );
   }
 
   if (displayedPromos.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -222,13 +265,19 @@ const PromoSection = React.memo(() => {
         <div className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-blue-100 to-blue-200">
             <Gift className="w-5 h-5 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-800">Special Offers</span>
+            <span className="text-sm font-semibold text-blue-800">
+              Special Offers
+            </span>
           </div>
-          <h2 className="mb-6 text-2xl font-bold text-gray-900 md:text-3xl lg:text-4xl tracking-tight">
-            <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">Special</span> Promos
+          <h2 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 md:text-4xl lg:text-5xl font-title">
+            <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">
+              Special
+            </span>{" "}
+            Promos
           </h2>
-          <p className="text-sm text-gray-600 max-w-2xl mx-auto md:text-lg">
-            Exclusive deals and discounts for your next adventure! Don't miss out on these amazing offers.
+          <p className="max-w-2xl mx-auto text-sm text-gray-600 md:text-lg">
+            Exclusive deals and discounts for your next adventure! Don't miss
+            out on these amazing offers.
           </p>
         </div>
 
@@ -238,16 +287,23 @@ const PromoSection = React.memo(() => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-8"
         >
-          <Carousel 
-            className="w-full" 
+          <Carousel
+            className="w-full"
             opts={{ align: "start", loop: displayedPromos.length > 3 }}
             plugins={[plugin.current]}
           >
             <CarouselContent className="-ml-4">
               {displayedPromos.map((item, index) => (
-                <CarouselItem key={item.id} className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3">
+                <CarouselItem
+                  key={item.id}
+                  className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3"
+                >
                   <div className="h-full">
-                    <PromoCard promoItem={item} index={index} onViewDetail={handleViewDetail} />
+                    <PromoCard
+                      promoItem={item}
+                      index={index}
+                      onViewDetail={handleViewDetail}
+                    />
                   </div>
                 </CarouselItem>
               ))}
@@ -259,12 +315,12 @@ const PromoSection = React.memo(() => {
               </>
             )}
           </Carousel>
-          
+
           {/* View All Promos Button */}
           <div className="mt-12 text-center">
             <Button
-              onClick={() => router.push('/promo')}
-              className="px-8 py-3 text-lg font-semibold text-white transition-all duration-200 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1"
+              onClick={() => router.push("/promo")}
+              className="px-8 py-3 text-lg font-semibold text-white transition-all duration-200 shadow-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 rounded-2xl hover:shadow-xl hover:-translate-y-1"
             >
               View All Promos
               <ArrowRight className="w-5 h-5 ml-2" />
@@ -273,9 +329,9 @@ const PromoSection = React.memo(() => {
         </motion.div>
       </div>
     </section>
-  )
-})
+  );
+});
 
-PromoSection.displayName = "PromoSection"
+PromoSection.displayName = "PromoSection";
 
-export default PromoSection
+export default PromoSection;

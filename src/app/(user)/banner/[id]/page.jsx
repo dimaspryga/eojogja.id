@@ -1,15 +1,21 @@
-"use client"
+"use client";
 
-import { use } from "react"
-import Link from "next/link"
-import { useDetailBanner } from "@/hooks/useDetailBanner"
-import { useActivity } from "@/hooks/useActivity"
-import { useAuth } from "@/context/AuthContext"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { Skeleton } from "@/components/ui/skeleton"
-import { Button } from "@/components/ui/button"
-import { Frown, ChevronRight, Star, MapPin, Sparkles } from "lucide-react"
-import { motion } from "framer-motion"
+import { use } from "react";
+import Link from "next/link";
+import { useDetailBanner } from "@/hooks/useDetailBanner";
+import { useActivity } from "@/hooks/useActivity";
+import { useAuth } from "@/context/AuthContext";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
+import { Frown, ChevronRight, Star, MapPin, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -17,9 +23,13 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
+} from "@/components/ui/breadcrumb";
+import Image from "next/image";
 
-const DEFAULT_ACTIVITY_IMAGE = "/assets/banner-authpage.png"
+const DEFAULT_ACTIVITY_IMAGE = "/assets/banner-authpage.png";
+
+const PLACEHOLDER_DATA_URL =
+  "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE2MCIgdmlld0JveD0iMCAwIDMwMCAxNjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMTYwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0xNDcuNSA5MkgxMzVMMTU3LjUgNjBMMTgwLjUgNjBMMTYwIDkySDEzNy41WiIgZmlsbD0iI0QxRDVEQiIvPgo8Y2lyY2xlIGN4PSIxNTcuNSIgY3k9IjYwIiByPSI3LjUiIGZpbGw9IiNEMUQ1REIiLz4KPC9zdmc+";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -29,7 +39,7 @@ const containerVariants = {
       staggerChildren: 0.1,
     },
   },
-}
+};
 
 const cardVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -41,16 +51,20 @@ const cardVariants = {
       ease: "easeOut",
     },
   },
-}
+};
 
 const DetailBanner = ({ params }) => {
-  const resolvedParams = use(params)
-  const id = resolvedParams?.id
-  const { detailBanner, isLoading: isBannerLoading, error } = useDetailBanner(id)
-  const { activity, isLoading: isActivityLoading } = useActivity()
-  const { loading: isAuthLoading } = useAuth()
+  const resolvedParams = use(params);
+  const id = resolvedParams?.id;
+  const {
+    detailBanner,
+    isLoading: isBannerLoading,
+    error,
+  } = useDetailBanner(id);
+  const { activity, isLoading: isActivityLoading } = useActivity();
+  const { loading: isAuthLoading } = useAuth();
 
-  const isLoading = isBannerLoading || isActivityLoading || isAuthLoading
+  const isLoading = isBannerLoading || isActivityLoading || isAuthLoading;
 
   if (isLoading) {
     return (
@@ -59,7 +73,7 @@ const DetailBanner = ({ params }) => {
           <Skeleton className="w-1/2 h-5 mb-6 rounded-lg" />
           <div className="flex flex-col gap-6 lg:flex-row">
             <div className="w-full space-y-4 lg:w-2/3">
-              <Skeleton className="w-full rounded-lg h-64" />
+              <Skeleton className="w-full h-64 rounded-lg" />
               <div className="space-y-3">
                 <Skeleton className="w-3/4 h-6 rounded" />
                 <Skeleton className="w-full h-20 rounded" />
@@ -81,7 +95,7 @@ const DetailBanner = ({ params }) => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
@@ -90,10 +104,12 @@ const DetailBanner = ({ params }) => {
         <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-red-100 rounded-full">
           <Frown className="w-12 h-12 text-red-500" />
         </div>
-        <h2 className="mt-4 text-3xl font-bold text-gray-900">Failed to Load Banner</h2>
+        <h2 className="mt-4 text-3xl font-bold text-gray-900">
+          Failed to Load Banner
+        </h2>
         <p className="mt-2 text-lg text-gray-600">{error.message}</p>
       </div>
-    )
+    );
   }
 
   if (!id || !detailBanner) {
@@ -103,11 +119,15 @@ const DetailBanner = ({ params }) => {
           <div className="flex items-center justify-center w-24 h-24 mx-auto mb-6 bg-blue-100 rounded-full">
             <Sparkles className="w-12 h-12 text-blue-600" />
           </div>
-          <h1 className="mb-4 text-3xl font-bold text-gray-900">Banner Not Found</h1>
-          <p className="text-gray-600">Banner detail not found or ID is invalid.</p>
+          <h1 className="mb-4 text-3xl font-bold text-gray-900">
+            Banner Not Found
+          </h1>
+          <p className="text-gray-600">
+            Banner detail not found or ID is invalid.
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
   return (
@@ -122,7 +142,10 @@ const DetailBanner = ({ params }) => {
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/" className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                <Link
+                  href="/"
+                  className="text-blue-600 transition-colors duration-200 hover:text-blue-800"
+                >
                   Home
                 </Link>
               </BreadcrumbLink>
@@ -132,7 +155,10 @@ const DetailBanner = ({ params }) => {
             </BreadcrumbSeparator>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/banner" className="text-blue-600 hover:text-blue-800 transition-colors duration-200">
+                <Link
+                  href="/banner"
+                  className="text-blue-600 transition-colors duration-200 hover:text-blue-800"
+                >
                   Banners
                 </Link>
               </BreadcrumbLink>
@@ -141,7 +167,9 @@ const DetailBanner = ({ params }) => {
               <ChevronRight className="text-blue-400" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbPage className="font-semibold text-gray-700">{detailBanner.name}</BreadcrumbPage>
+              <BreadcrumbPage className="font-semibold text-gray-700">
+                {detailBanner.name}
+              </BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -150,12 +178,13 @@ const DetailBanner = ({ params }) => {
           <div className="w-full lg:w-2/3">
             <div className="overflow-hidden border border-blue-100 shadow-2xl bg-white/90 backdrop-blur-sm rounded-3xl">
               <div className="relative w-full h-80 md:h-96">
-                <img
+                <Image
                   src={detailBanner.imageUrl || "/placeholder.svg"}
                   alt={detailBanner.name || "Banner image"}
+                  fill
                   onError={(e) => {
-                    e.currentTarget.onerror = null
-                    e.currentTarget.src = "/assets/error.png"
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = PLACEHOLDER_DATA_URL;
                   }}
                   className="object-cover w-full h-full"
                 />
@@ -170,11 +199,14 @@ const DetailBanner = ({ params }) => {
             </div>
 
             <div className="p-8 mt-6 border border-blue-100 shadow-xl bg-white/90 backdrop-blur-sm rounded-3xl">
-              <h1 className="mb-4 text-4xl font-bold text-gray-900">{detailBanner.name}</h1>
+              <h1 className="mb-4 text-4xl font-bold text-gray-900">
+                {detailBanner.name}
+              </h1>
               <p className="text-lg leading-relaxed text-gray-700">
-                From breathtaking natural wonders to world-famous attractions, explore everything your dream destination
-                has to offer, all in one place. Discover amazing experiences that will create memories to last a
-                lifetime.
+                From breathtaking natural wonders to world-famous attractions,
+                explore everything your dream destination has to offer, all in
+                one place. Discover amazing experiences that will create
+                memories to last a lifetime.
               </p>
             </div>
           </div>
@@ -185,10 +217,12 @@ const DetailBanner = ({ params }) => {
                 <div className="flex items-center justify-center w-16 h-16 mx-auto mb-6 bg-blue-100 rounded-full">
                   <MapPin className="w-8 h-8 text-blue-600" />
                 </div>
-                <h2 className="mb-4 text-2xl font-bold text-gray-800">Ready for an Adventure?</h2>
+                <h2 className="mb-4 text-2xl font-bold text-gray-800">
+                  Ready for an Adventure?
+                </h2>
                 <p className="mb-6 leading-relaxed text-gray-600">
-                  Check out all the exciting activities available now and start planning your next unforgettable
-                  journey!
+                  Check out all the exciting activities available now and start
+                  planning your next unforgettable journey!
                 </p>
                 <Button
                   asChild
@@ -210,11 +244,20 @@ const DetailBanner = ({ params }) => {
               <h2 className="mb-4 text-3xl font-bold text-gray-900">
                 Related <span className="text-blue-600">Activities</span>
               </h2>
-              <p className="text-lg text-gray-600">Discover more amazing experiences</p>
+              <p className="text-lg text-gray-600">
+                Discover more amazing experiences
+              </p>
             </div>
 
-            <motion.div variants={containerVariants} initial="hidden" animate="visible">
-              <Carousel opts={{ align: "start", loop: activity.length > 3 }} className="w-full">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <Carousel
+                opts={{ align: "start", loop: activity.length > 3 }}
+                className="w-full"
+              >
                 <CarouselContent className="-ml-2 md:-ml-4">
                   {activity.map((rec) => (
                     <CarouselItem
@@ -222,17 +265,21 @@ const DetailBanner = ({ params }) => {
                       className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                     >
                       <motion.div variants={cardVariants}>
-                        <Link href={`/activity/${rec.id}`} className="block h-full group">
+                        <Link
+                          href={`/activity/${rec.id}`}
+                          className="block h-full group"
+                        >
                           <div className="flex flex-col h-full overflow-hidden transition-all duration-300 border border-blue-100 shadow-lg bg-white/90 backdrop-blur-sm rounded-3xl hover:shadow-2xl hover:-translate-y-2">
                             <div className="relative w-full h-48 overflow-hidden rounded-t-3xl">
-                              <img
-                                src={rec.imageUrls?.[0] || DEFAULT_ACTIVITY_IMAGE}
-                                alt={rec.title || "Activity"}
-                                className="absolute inset-0 object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+                              <Image
+                                src={rec.imageUrl}
+                                alt={rec.name}
+                                fill
                                 onError={(e) => {
-                                  e.currentTarget.onerror = null
-                                  e.currentTarget.src = "/assets/error.png"
+                                  e.currentTarget.onerror = null;
+                                  e.currentTarget.src = PLACEHOLDER_DATA_URL;
                                 }}
+                                className="object-cover w-full h-full"
                               />
                               <div className="absolute p-2 transition-opacity duration-300 rounded-full shadow-lg opacity-0 top-3 right-3 bg-white/90 backdrop-blur-sm group-hover:opacity-100">
                                 <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
@@ -265,7 +312,7 @@ const DetailBanner = ({ params }) => {
         )}
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
-export default DetailBanner
+export default DetailBanner;

@@ -1,11 +1,15 @@
-import { Inter } from "next/font/google";
+import { Inter, Agdasima } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";
-import { CartProvider } from "@/context/CartContext";
 import { cn } from "@/lib/utils";
-import { TransactionProvider } from "@/context/TransactionContext";
 import { Analytics } from "@vercel/analytics/next";
+
+const fontTitle = Agdasima({
+  variable: "--font-agdasima",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
 
 const fontSans = Inter({
   variable: "--font-inter",
@@ -27,17 +31,14 @@ export default function RootLayout({ children }) {
       <body
         className={cn(
           "min-h-screen bg-background font-inter antialiased",
-          fontSans.variable
+          fontSans.variable,
+          fontTitle.variable
         )}
       >
         <AuthProvider>
-          <CartProvider>
-            <TransactionProvider>
-              {children}
-              <Analytics />
-              <Toaster richColors position="top-center" duration={3000} />
-            </TransactionProvider>
-          </CartProvider>
+          {children}
+          <Analytics />
+          <Toaster richColors position="top-center" duration={3000} />
         </AuthProvider>
       </body>
     </html>

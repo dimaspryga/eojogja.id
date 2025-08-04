@@ -192,7 +192,7 @@ const HeroSection = React.memo(() => {
           </motion.div>
 
           {/* Main Heading */}
-          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl xl:text-7xl">
+          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl xl:text-7xl font-title">
             Plan And Organize{" "}
             <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
               Unforgettable Event

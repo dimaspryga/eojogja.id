@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Mail, Send, Loader2, Bell } from 'lucide-react';
-import { toast } from 'sonner';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Mail, Send, Loader2, Bell } from "lucide-react";
+import { toast } from "sonner";
+import { motion } from "framer-motion";
 
 const SubscribeSection = () => {
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e) => {
@@ -17,13 +17,13 @@ const SubscribeSection = () => {
       toast.error("Please enter your email address.");
       return;
     }
-    
+
     setIsLoading(true);
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
       toast.success("Thank you for subscribing to our newsletter!");
-      setEmail('');
+      setEmail("");
     }, 1500);
   };
 
@@ -41,13 +41,17 @@ const SubscribeSection = () => {
           <div className="flex items-center justify-center w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-100 to-blue-200">
             <Bell className="w-10 h-10 text-blue-600" />
           </div>
-          
-          <h2 className="mb-6 text-xl font-bold text-gray-900 md:text-2xl lg:text-3xl tracking-tight">
-            Stay Updated with Our <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">Latest Offers</span>
+
+          <h2 className="mb-6 text-3xl font-bold tracking-tight text-gray-900 md:text-3xl lg:text-4xl font-title">
+            Stay Updated with Our{" "}
+            <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">
+              Latest Offers
+            </span>
           </h2>
-          
-          <p className="max-w-2xl mx-auto mb-8 text-sm text-gray-600 md:text-lg">
-            Join our newsletter to receive the latest news, exclusive deals, and travel tips directly to your inbox.
+
+          <p className="max-w-xl mx-auto mb-8 text-sm text-gray-600 md:text-lg">
+            Join our newsletter to receive the latest news, exclusive deals, and
+            travel tips directly to your inbox.
           </p>
 
           <motion.div
@@ -56,8 +60,8 @@ const SubscribeSection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <form 
-              onSubmit={handleSubmit} 
+            <form
+              onSubmit={handleSubmit}
               className="flex flex-col w-full max-w-md gap-4 mx-auto sm:flex-row sm:max-w-lg"
             >
               <div className="relative flex-grow">
@@ -67,14 +71,14 @@ const SubscribeSection = () => {
                   placeholder="Enter your email address"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full h-12 pl-12 text-base text-gray-900 bg-white border border-gray-200 rounded-xl focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:border-blue-500 transition-all duration-200"
+                  className="w-full h-12 pl-12 text-base text-gray-900 transition-all duration-200 bg-white border border-gray-200 rounded-xl focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:border-blue-500"
                   required
                 />
               </div>
               <Button
                 type="submit"
-                size="lg" 
-                className="h-12 text-base text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition-all duration-200 hover:scale-105"
+                size="lg"
+                className="h-12 text-base text-white transition-all duration-200 bg-blue-600 hover:bg-blue-700 rounded-xl hover:scale-105"
                 disabled={isLoading}
               >
                 {isLoading ? (
@@ -86,7 +90,7 @@ const SubscribeSection = () => {
               </Button>
             </form>
           </motion.div>
-          
+
           <p className="mt-4 text-sm text-gray-500">
             We respect your privacy. Unsubscribe at any time.
           </p>

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useSWRDetailCategory } from "@/hooks/useSWRDetailCategory";
 import { useSWRActivityByCategory } from "@/hooks/useSWRActivityByCategory";
 import { useAuth } from "@/context/AuthContext";
-import { useCart } from "@/hooks/useCart";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -33,8 +32,6 @@ import { IconBrandWhatsapp } from "@tabler/icons-react";
 
 const PLACEHOLDER_DATA_URL =
   "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSI2MDAiIHZpZXdCb3g9IjAgMCAxMDAwIDYwMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEwMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik00ODcuNSAzMTJIMzc1TDQzNy41IDI1MEw1NjIuNSAyNTBMNTAwIDMxMkg0ODcuNVoiIGZpbGw9IiNEMUQ1REIiLz4KPGNpcmNsZSBjeD0iNDM3LjUiIGN5PSIyNTAiIHI9IjEyLjUiIGZpbGw9IiNEMUQ1REIiLz4KPC9zdmc+";
-
-const DEFAULT_ACTIVITY_IMAGE = PLACEHOLDER_DATA_URL;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -86,11 +83,7 @@ const ActivityCard = ({ activity }) => {
         <Link href={`/activity/${activity.id}`} className="block">
           <div className="relative overflow-hidden aspect-[4/3]">
             <img
-              src={
-                activity.imageUrls?.[0] ||
-                activity.image ||
-                DEFAULT_ACTIVITY_IMAGE
-              }
+              src={activity.imageUrls || activity.image || PLACEHOLDER_DATA_URL}
               alt={activity.title}
               className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-110"
               onError={(e) => {
@@ -282,7 +275,7 @@ export function DetailCategoryClient({
           className="relative flex items-center justify-center w-full h-[350px] md:h-[450px] border border-blue-100 shadow-2xl bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden mb-12"
         >
           <img
-            src={detailCategory.image}
+            src={detailCategory.imageUrls}
             alt={detailCategory.name || "Category image"}
             onError={(e) => {
               e.currentTarget.onerror = null;

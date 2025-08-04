@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import axios from "axios";
-import { DetailActivityClient } from "@/components/ui/user/DetailActivityClient";
+
 import { Skeleton } from "@/components/ui/skeleton";
+import { DetailActivityClient } from "@/components/ui/user/DetailActivityClient";
 
 // Optimized image utility functions
 const PLACEHOLDER_DATA_URL =
@@ -40,17 +40,17 @@ const DetailActivitySkeleton = () => (
       <Skeleton className="w-1/3 h-5 mb-6 rounded-lg" />
       <div className="flex flex-col gap-6 lg:flex-row">
         <div className="w-full space-y-4 lg:w-2/3">
-          <div className="p-4 border border-gray-200 bg-white rounded-lg">
+          <div className="p-4 bg-white border border-gray-200 rounded-lg">
             <Skeleton className="w-3/4 h-6 mb-4 rounded" />
             <div className="flex flex-wrap items-center gap-2">
               <Skeleton className="w-1/3 h-4 rounded" />
               <Skeleton className="w-1/2 h-4 rounded" />
             </div>
           </div>
-          <Skeleton className="w-full rounded-lg aspect-video h-64" />
+          <Skeleton className="w-full h-64 rounded-lg aspect-video" />
         </div>
         <div className="w-full lg:w-1/3">
-          <div className="sticky p-4 border border-gray-200 bg-white rounded-lg top-24">
+          <div className="sticky p-4 bg-white border border-gray-200 rounded-lg top-24">
             <div className="space-y-3">
               <div className="space-y-2">
                 <Skeleton className="w-1/2 h-6 rounded" />
@@ -107,7 +107,7 @@ export default async function DetailActivityPage({ params }) {
               />
             </svg>
           </div>
-          <h1 className="mb-4 text-2xl font-bold text-gray-900 md:text-3xl tracking-tight">
+          <h1 className="mb-4 text-2xl font-bold tracking-tight text-gray-900 md:text-3xl">
             Activity Not Found
           </h1>
           <p className="text-gray-600">Detail activity not found.</p>
@@ -118,7 +118,10 @@ export default async function DetailActivityPage({ params }) {
 
   return (
     <Suspense fallback={<DetailActivitySkeleton />}>
-      <DetailActivityClient initialActivity={initialActivity} />
+      <DetailActivityClient
+        key={initialActivity.id}
+        initialActivity={initialActivity}
+      />
     </Suspense>
   );
 }

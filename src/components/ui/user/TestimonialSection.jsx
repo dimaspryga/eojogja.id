@@ -88,13 +88,20 @@ const TestimonialSection = () => {
         <div className="mb-16 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-gradient-to-r from-blue-100 to-blue-200">
             <Star className="w-5 h-5 text-blue-600" />
-            <span className="text-sm font-semibold text-blue-800">Customer Reviews</span>
+            <span className="text-sm font-semibold text-blue-800">
+              Customer Reviews
+            </span>
           </div>
-          <h2 className="mb-6 text-2xl font-bold text-gray-900 md:text-3xl lg:text-4xl tracking-tight">
-            What Our <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">Customers</span> Say
+          <h2 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 md:text-3xl lg:text-5xl font-title">
+            What Our{" "}
+            <span className="text-transparent bg-gradient-to-r from-blue-600 to-blue-700 bg-clip-text">
+              Customers
+            </span>{" "}
+            Say
           </h2>
-          <p className="text-sm text-gray-600 max-w-2xl mx-auto md:text-lg">
-            Real experiences from travelers who have discovered amazing adventures with us
+          <p className="max-w-3xl mx-auto text-sm text-gray-600 md:text-lg">
+            Real experiences from travelers who have discovered amazing
+            adventures with us
           </p>
         </div>
 
@@ -104,14 +111,17 @@ const TestimonialSection = () => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="mb-8"
         >
-          <Carousel 
-            className="w-full" 
+          <Carousel
+            className="w-full"
             opts={{ align: "start", loop: testimonials.length > 4 }}
             plugins={[plugin.current]}
           >
             <CarouselContent className="-ml-4">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3">
+                <CarouselItem
+                  key={index}
+                  className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3"
+                >
                   <div className="h-full">
                     <motion.div
                       variants={itemVariants}
@@ -124,29 +134,36 @@ const TestimonialSection = () => {
                           <Star
                             key={i}
                             className={`w-4 h-4 ${
-                              i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+                              i < testimonial.rating
+                                ? "text-yellow-400 fill-yellow-400"
+                                : "text-gray-300"
                             }`}
                           />
                         ))}
                       </div>
-                      <blockquote className="flex-grow mb-4 text-gray-700 leading-relaxed">
+                      <blockquote className="flex-grow mb-4 leading-relaxed text-gray-700">
                         "{testimonial.comment}"
                       </blockquote>
                       <div className="flex items-center">
                         <div className="flex-shrink-0">
                           <img
-                            className="object-cover w-10 h-10 rounded-full border-2 border-gray-100"
+                            className="object-cover w-10 h-10 border-2 border-gray-100 rounded-full"
                             src={testimonial.avatar}
                             alt={testimonial.name}
                             onError={(e) => {
-                              e.target.onerror = null
-                              e.target.src = "https://placehold.co/40x40/dbeafe/2563eb?text=U"
+                              e.target.onerror = null;
+                              e.target.src =
+                                "https://placehold.co/40x40/dbeafe/2563eb?text=U";
                             }}
                           />
                         </div>
                         <div className="ml-3">
-                          <p className="text-sm font-semibold text-gray-900">{testimonial.name}</p>
-                          <p className="text-sm text-gray-500">{testimonial.location}</p>
+                          <p className="text-sm font-semibold text-gray-900">
+                            {testimonial.name}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            {testimonial.location}
+                          </p>
                         </div>
                       </div>
                     </motion.div>

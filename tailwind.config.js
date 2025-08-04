@@ -13,10 +13,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // 2. Ganti 'inter' menjadi 'sans'
-        // Ini akan menimpa font sans-serif default dengan variabel --font-inter (yaitu Inter)
-        // dan menyertakan font sistem sebagai cadangan.
         sans: ["var(--font-inter)", ...fontFamily.sans],
+        title: ["var(--font-agdasima)", ...fontFamily.sans],
       },
       colors: {
         destructive: {
