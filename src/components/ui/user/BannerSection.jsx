@@ -62,7 +62,7 @@ const BannerSectionSkeleton = () => (
   <div className="py-8 bg-white">
     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <div className="relative">
-        <div className="relative overflow-hidden border border-gray-200 bg-white rounded-2xl">
+        <div className="relative overflow-hidden bg-white border border-gray-200 rounded-2xl">
           <div className="w-full aspect-[3/1] bg-gradient-to-br from-gray-200 via-gray-100 to-gray-200 animate-pulse" />
           <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 bg-gradient-to-t from-black/20 via-transparent to-transparent">
             <div className="w-32 h-8 mb-3 rounded-full bg-gradient-to-r from-blue-200 via-blue-100 to-blue-200 animate-pulse" />
@@ -71,11 +71,11 @@ const BannerSectionSkeleton = () => (
         </div>
 
         {/* Navigation buttons skeleton */}
-        <div className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 border border-gray-200 animate-pulse" />
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 border border-gray-200 animate-pulse" />
+        <div className="absolute w-10 h-10 -translate-y-1/2 border border-gray-200 rounded-full left-4 top-1/2 bg-white/90 animate-pulse" />
+        <div className="absolute w-10 h-10 -translate-y-1/2 border border-gray-200 rounded-full right-4 top-1/2 bg-white/90 animate-pulse" />
 
         {/* Play/Pause button skeleton */}
-        <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-white/90 border border-gray-200 animate-pulse" />
+        <div className="absolute w-10 h-10 border border-gray-200 top-4 right-4 rounded-xl bg-white/90 animate-pulse" />
       </div>
     </div>
   </div>
@@ -165,14 +165,14 @@ const BannerSection = React.memo(() => {
                           onError={() => handleImageError(bannerItem.id)}
                         />
                         <div className="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8 bg-gradient-to-t from-black/70 via-black/20 to-transparent">
-                          <div className="inline-flex items-center px-3 py-1 mb-3 text-sm font-semibold text-white bg-blue-600 rounded-full">
-                            <Sparkles className="w-4 h-4 mr-2" />
+                          <div className="inline-flex items-center px-3 py-1 mb-3 text-xs font-semibold text-white bg-blue-600 rounded-full">
+                            <Sparkles className="w-4 h-3 mr-2" />
                             Featured Banner
                           </div>
-                          <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white drop-shadow-lg transition-transform duration-300 group-hover:translate-y-[-2px] line-clamp-2">
+                          <h3 className="text-sm md:text-xl lg:text-2xl font-bold text-white drop-shadow-lg transition-transform duration-300 group-hover:translate-y-[-2px] line-clamp-2">
                             {bannerItem.title}
                           </h3>
-                          <p className="text-sm md:text-base text-white/90">
+                          <p className="text-xs md:text-base text-white/90">
                             {bannerItem.description}
                           </p>
                         </div>
@@ -184,8 +184,8 @@ const BannerSection = React.memo(() => {
 
               {banner.length > 1 && (
                 <>
-                  <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm border-blue-200 hover:bg-blue-50" />
-                  <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/90 backdrop-blur-sm border-blue-200 hover:bg-blue-50" />
+                  <CarouselPrevious className="absolute z-10 -translate-y-1/2 border-blue-200 left-4 top-1/2 bg-white/90 backdrop-blur-sm hover:bg-blue-50" />
+                  <CarouselNext className="absolute z-10 -translate-y-1/2 border-blue-200 right-4 top-1/2 bg-white/90 backdrop-blur-sm hover:bg-blue-50" />
                 </>
               )}
             </Carousel>
@@ -194,7 +194,7 @@ const BannerSection = React.memo(() => {
               <Button
                 variant="outline"
                 size="icon"
-                className="absolute z-10 transition-all duration-200 shadow-lg top-4 right-4 bg-white/90 backdrop-blur-sm border-blue-200 hover:bg-white hover:shadow-xl hover:border-blue-300 rounded-xl"
+                className="absolute z-10 transition-all duration-200 border-blue-200 shadow-lg top-2 right-2 bg-white/90 backdrop-blur-sm hover:bg-white hover:shadow-xl hover:border-blue-300 rounded-xl"
                 onClick={toggleAutoplay}
                 aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
               >

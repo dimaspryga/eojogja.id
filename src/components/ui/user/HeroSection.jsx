@@ -185,14 +185,14 @@ const HeroSection = React.memo(() => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-medium border rounded-full bg-white/20 backdrop-blur-sm border-white/30"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-xs font-medium border rounded-full bg-white/20 backdrop-blur-sm border-white/30"
           >
             <Sparkles className="w-4 h-4" />
             Discover Amazing Adventures
           </motion.div>
 
           {/* Main Heading */}
-          <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl xl:text-7xl font-title">
+          <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl font-title">
             Plan And Organize{" "}
             <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
               Unforgettable Event
@@ -200,7 +200,7 @@ const HeroSection = React.memo(() => {
           </h1>
 
           {/* Subtitle */}
-          <p className="max-w-3xl mx-auto mb-10 text-lg leading-relaxed md:text-xl lg:text-2xl text-white/90">
+          <p className="max-w-3xl mx-auto mb-10 text-sm leading-relaxed md:text-xl lg:text-2xl text-white/90">
             Discover amazing activities, unique places, and unforgettable
             experiences for your perfect getaway.
           </p>
@@ -249,24 +249,24 @@ const HeroSection = React.memo(() => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-8 mt-12 text-white/80"
+            className="flex flex-wrap items-center justify-center gap-4 mt-12 text-white/80 lg:gap-8"
           >
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">
+              <div className="font-bold text-white text-md lg:text-2xl md:text-xl">
                 <CountUp start={0} end={1000} duration={2.5} suffix="+" />
               </div>
               <div className="text-sm">Activities</div>
             </div>
             <div className="w-px h-8 bg-white/30" />
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">
+              <div className="font-bold text-white text-md lg:text-2xl md:text-xl">
                 <CountUp start={0} end={50} duration={2.5} suffix="+" />
               </div>
               <div className="text-sm">Destinations</div>
             </div>
             <div className="w-px h-8 bg-white/30" />
             <div className="text-center">
-              <div className="text-2xl font-bold text-white">
+              <div className="font-bold text-white text-md lg:text-2xl md:text-xl">
                 <CountUp start={0} end={10000} duration={2.5} suffix="+" />
               </div>
               <div className="text-sm">Happy Travelers</div>

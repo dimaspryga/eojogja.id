@@ -8,14 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
-import {
-  Menu,
-  X,
-  Home,
-  MapPin,
-  Tag,
-  Gift,
-} from "lucide-react";
+import { Menu, X, Home, MapPin, Tag, Gift } from "lucide-react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
