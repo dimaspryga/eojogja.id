@@ -88,7 +88,7 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -20, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed left-0 right-0 z-40 bg-white shadow-2xl lg:hidden overflow-y-auto"
+            className="fixed left-0 right-0 z-40 overflow-y-auto bg-white shadow-2xl lg:hidden"
             style={{ top: "4rem", height: "calc(100vh - 4rem)" }}
           >
             <div className="flex flex-col h-full">
@@ -147,7 +147,7 @@ const Navbar = () => {
                 <img
                   src="/assets/Parama-Logo-1.png"
                   alt="Kelana Logo"
-                  className="object-contain w-20 h-20 lg:w-28 lg:h-28"
+                  className="object-contain w-30 h-30 lg:w-40 lg:h-40"
                 />
               </div>
             </Link>
@@ -157,7 +157,7 @@ const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="relative z-50 lg:hidden p-2"
+            className="relative z-50 p-2 lg:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <motion.div

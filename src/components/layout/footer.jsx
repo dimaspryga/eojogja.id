@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import { usePaymentMethod } from "@/hooks/usePaymentMethod";
-import { Skeleton } from "@/components/ui/skeleton";
 import {
   Twitter,
   Instagram,
@@ -65,7 +64,8 @@ const Footer = () => {
                 className="w-auto h-12 filter brightness-0 invert"
               />
             </Link>
-            <p className="mt-4 text-sm leading-relaxed text-blue-100">
+            {/* Ukuran teks deskripsi perusahaan: text-sm untuk mobile, md:text-base untuk desktop */}
+            <p className="mt-4 text-sm leading-relaxed text-blue-100 md:text-base">
               The best platform to plan your unforgettable adventures. Discover
               amazing activities, unique places, and unforgettable experiences.
             </p>
@@ -103,12 +103,14 @@ const Footer = () => {
 
           {footerLinks.map((section) => (
             <div key={section.title} className="space-y-4">
-              <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+              {/* Ukuran teks judul bagian: text-base untuk mobile, sm:text-lg untuk layar kecil ke atas */}
+              <h3 className="text-base font-semibold tracking-wider text-white uppercase sm:text-lg">
                 {section.title}
               </h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
+                    {/* Ukuran teks link: text-base untuk mobile */}
                     <Link
                       href={link.href}
                       className="inline-block text-base text-blue-200 transition-all duration-200 hover:text-white hover:underline hover:translate-x-1"
@@ -122,7 +124,8 @@ const Footer = () => {
           ))}
 
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold tracking-wider text-white uppercase">
+            {/* Ukuran teks judul Contact Us: text-base untuk mobile, sm:text-lg untuk layar kecil ke atas */}
+            <h3 className="text-base font-semibold tracking-wider text-white uppercase sm:text-lg">
               Contact Us
             </h3>
             <ul className="space-y-4">
@@ -130,6 +133,7 @@ const Footer = () => {
                 <div className="p-1 mt-1 text-blue-200 transition-all duration-200 rounded-full group-hover:text-white group-hover:bg-blue-700">
                   <MapPin className="w-4 h-4" />
                 </div>
+                {/* Ukuran teks alamat: text-base untuk mobile */}
                 <p className="text-base text-blue-200 transition-colors duration-200 group-hover:text-white">
                   Bogor, West Java, 16161
                 </p>
@@ -138,6 +142,7 @@ const Footer = () => {
                 <div className="p-1 text-blue-200 transition-all duration-200 rounded-full group-hover:text-white group-hover:bg-blue-700">
                   <Phone className="w-4 h-4" />
                 </div>
+                {/* Ukuran teks telepon: text-base untuk mobile */}
                 <a
                   href="tel:+622112345678"
                   className="text-base text-blue-200 transition-all duration-200 hover:text-white hover:underline"
@@ -149,17 +154,19 @@ const Footer = () => {
                 <div className="p-1 text-blue-200 transition-all duration-200 rounded-full group-hover:text-white group-hover:bg-blue-700">
                   <Mail className="w-4 h-4" />
                 </div>
+                {/* Ukuran teks email: text-base untuk mobile */}
                 <a
                   href="mailto:support@kelana.com"
                   className="text-base text-blue-200 transition-all duration-200 hover:text-white hover:underline"
                 >
-                  support@kelana.com
+                  support@paramamedianetwork.com
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
+        {/* Bagian Payment Partners (dikomentari di kode asli, saya biarkan begitu) */}
         {/* <div className="pt-12 mt-12 border-t border-blue-700">
           <h3 className="mb-8 text-sm font-semibold tracking-wider text-center text-white uppercase">
             Our Payment Partners
@@ -192,11 +199,13 @@ const Footer = () => {
       <div className="border-t border-blue-800 bg-blue-950">
         <div className="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row">
+            {/* Ukuran teks copyright: text-sm untuk mobile */}
             <p className="text-sm text-blue-300">
               &copy; {new Date().getFullYear()} EOJOGJA.ID by PT PARAMA MEDIA
               NETWORK. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm text-blue-300">
+            {/* Ukuran teks link bawah: text-xs untuk mobile, sm:text-sm untuk layar kecil ke atas */}
+            <div className="flex items-center gap-6 text-xs text-blue-300 sm:text-sm">
               <Link
                 href="/"
                 className="transition-colors duration-200 hover:text-white"

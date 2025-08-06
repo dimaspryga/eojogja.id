@@ -97,7 +97,7 @@ const HeroSection = React.memo(() => {
 
   return (
     <section
-      className="relative w-full h-[70vh] md:h-[85vh] overflow-hidden"
+      className="relative w-full h-[75vh] md:h-[85vh] overflow-hidden"
       aria-label="Hero section"
     >
       {/* Background Image with optimized loading */}
@@ -192,7 +192,7 @@ const HeroSection = React.memo(() => {
           </motion.div>
 
           {/* Main Heading */}
-          <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-6xl font-title">
+          <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-5xl lg:text-7xl font-title">
             Plan And Organize{" "}
             <span className="text-transparent bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text">
               Unforgettable Event
@@ -200,7 +200,7 @@ const HeroSection = React.memo(() => {
           </h1>
 
           {/* Subtitle */}
-          <p className="max-w-3xl mx-auto mb-10 text-sm leading-relaxed md:text-xl lg:text-2xl text-white/90">
+          <p className="mx-auto mb-10 text-sm leading-relaxed max-w-7xl md:text-xl lg:text-xl text-white/90">
             Discover amazing activities, unique places, and unforgettable
             experiences for your perfect getaway.
           </p>

@@ -296,7 +296,7 @@ const PromoSection = React.memo(() => {
               {displayedPromos.map((item, index) => (
                 <CarouselItem
                   key={item.id}
-                  className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3"
+                  className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
                 >
                   <div className="h-full">
                     <PromoCard

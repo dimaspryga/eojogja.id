@@ -125,7 +125,7 @@ const ActivityCard = React.memo(
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <div className="flex flex-col">
+                <div className="flex-col-2">
                   {hasDiscount ? (
                     <>
                       <p className="text-xs text-gray-400 line-through sm:text-sm">
@@ -290,7 +290,7 @@ const ActivitySection = React.memo(() => {
               {popularActivities.map((activityItem, index) => (
                 <CarouselItem
                   key={activityItem.id}
-                  className="pl-2 md:pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                 >
                   <ActivityCard
                     activityItem={activityItem}

@@ -232,7 +232,7 @@ const ActivityDiscountSection = React.memo(() => {
               {discountedActivities.map((activityItem, index) => (
                 <CarouselItem
                   key={activityItem.id}
-                  className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5"
+                  className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/5"
                 >
                   <ActivityCard
                     activityItem={activityItem}

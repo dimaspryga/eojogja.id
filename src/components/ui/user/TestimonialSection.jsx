@@ -120,7 +120,7 @@ const TestimonialSection = () => {
               {testimonials.map((testimonial, index) => (
                 <CarouselItem
                   key={index}
-                  className="pl-4 basis-1/2 sm:basis-1/2 lg:basis-1/3"
+                  className="pl-4 basis-full sm:basis-1/2 lg:basis-1/3"
                 >
                   <div className="h-full">
                     <motion.div
